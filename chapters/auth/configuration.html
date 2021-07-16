@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>21.5. Configuring Identity &#8212; C# Web Development  documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fa/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/launchcode.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/site.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="21.6. Identity and Authorization" href="authorization.html" />
+    <link rel="prev" title="21.4. Registrations and Logins" href="users.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body class="body-bc">
+
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+   <div class="container">
+     <div class="navbar-header">
+       <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/lc-ed-logo.png" alt="LaunchCode logo"></span>
+       </a>
+       <span class="navbar-text navbar-version pull-left"><b></b></span>
+     </div>
+
+       <div class="collapse navbar-collapse nav-collapse">
+         <ul class="nav navbar-nav">
+           
+           
+             
+           
+           
+           
+           
+           
+         </ul>
+
+         
+           
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+    <label for="q" class="searchLabel">Search</label>
+    <input type="text" name="q" class="form-control" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+         
+       </div>
+   </div>
+ </div>
+
+<ol class="breadcrumb container">
+    <li><a href="../../index.html">Contents</a></li>
+    <li><a href="index.html">21. Authentication</a></li>
+    <li class="active">21.5. Configuring Identity</li>
+</ol>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 content ">
+
+    
+  <div class="section" id="configuring-identity">
+<h1>21.5. Configuring Identity<a class="headerlink" href="#configuring-identity" title="Permalink to this headline">¶</a></h1>
+<p>With Identity in place, we can start to configure the settings of the library to meet our authentication requirements.
+The first place to start with configuring Identity to fit the needs of the project is in <code class="docutils literal notranslate"><span class="pre">Startup.cs</span></code>.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title"><i class="fas fa-sticky-note" aria-hidden="true"></i>Note</p>
+<p class="last">Try and code along as you read more about Identity!
+This page starts off with the code in the <a class="reference external" href="https://github.com/LaunchCodeEducation/CodingEventsDemo/tree/identity-scaffolding" target="_blank">identity-scaffolding<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> branch in <code class="docutils literal notranslate"><span class="pre">CodingEventsDemo</span></code>.
+The final code for this page is in the <a class="reference external" href="https://github.com/LaunchCodeEducation/CodingEventsDemo/tree/identity-config" target="_blank">identity-config<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> branch in <code class="docutils literal notranslate"><span class="pre">CodingEventsDemo</span></code>.</p>
+</div>
+<div class="section" id="startup-cs">
+<h2>21.5.1. <code class="docutils literal notranslate"><span class="pre">Startup.cs</span></code><a class="headerlink" href="#startup-cs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configureservices">
+<h3>21.5.1.1. <code class="docutils literal notranslate"><span class="pre">ConfigureServices()</span></code><a class="headerlink" href="#configureservices" title="Permalink to this headline">¶</a></h3>
+<p>The first place that we may want to customize our settings is at the bottom of <code class="docutils literal notranslate"><span class="pre">ConfigureServices()</span></code>.
+When you were testing out your application, you may have accidentally entered an invalid password.
+The validation conditions for a user’s password is an example of one of the settings that can be configured here by using a method called <code class="docutils literal notranslate"><span class="pre">services.Configure&lt;IdentityOptions&gt;()</span></code>.
+If we wanted to make the minimum number of characters for our password 10 as opposed to 6, we would do the following.</p>
+<div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">services</span><span class="p">.</span><span class="n">Configure</span><span class="p">&lt;</span><span class="n">IdentityOptions</span><span class="p">&gt;(</span> <span class="n">options</span> <span class="p">=&gt;</span>
+   <span class="n">options</span><span class="p">.</span><span class="n">Password</span><span class="p">.</span><span class="n">RequiredLength</span> <span class="p">=</span> <span class="m">10</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>For a full list of the default settings for users’ passwords and how we can change those settings, check out the <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.passwordoptions?view=aspnetcore-3.1" target="_blank">documentation<i class="fas fa-external-link-alt" aria-hidden="true"></i></a>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">ConfigureServices()</span></code>, we can also configure cookie settings, password hashers, user validation requirements, sign in settings and more.</p>
+</div>
+<div class="section" id="configure">
+<h3>21.5.1.2. <code class="docutils literal notranslate"><span class="pre">Configure()</span></code><a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h3>
+<p>Below <code class="docutils literal notranslate"><span class="pre">ConfigureServices()</span></code>, you will find <code class="docutils literal notranslate"><span class="pre">Configure()</span></code>. Inside <code class="docutils literal notranslate"><span class="pre">Configure()</span></code>, we must make sure we have the following:</p>
+<div class="highlight-csharp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">app</span><span class="p">.</span><span class="n">UseRouting</span><span class="p">();</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">UseAuthentication</span><span class="p">();</span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseAuthorization</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>While we did properly scaffold Identity onto our code base, we need to add the calls to <code class="docutils literal notranslate"><span class="pre">UseAuthentication()</span></code> and <code class="docutils literal notranslate"><span class="pre">UseAuthorization()</span></code>.
+Our application uses middleware to relay requests between our application and our database.
+By adding the calls to <code class="docutils literal notranslate"><span class="pre">UseAuthentication()</span></code> and <code class="docutils literal notranslate"><span class="pre">UseAuthorization()</span></code>, we are specifying that we now need authentication middleware to handle these requests.
+Authentication is not just about ensuring users are signed in. It is about protecting data at every point it passes through to make the application work.</p>
+</div>
+</div>
+<div class="section" id="additional-customizations">
+<h2>21.5.2. Additional Customizations<a class="headerlink" href="#additional-customizations" title="Permalink to this headline">¶</a></h2>
+<p>As you learn more about what Identity can do, you may find yourself wanting to customize it more and more to suit your needs!
+Here are some examples of what you can do with it.</p>
+<ol class="arabic simple">
+<li>Customize user information</li>
+<li>Customize user roles</li>
+<li>Customize the UI</li>
+<li>Add new settings to user passwords</li>
+<li>Change the default settings around user sign-in</li>
+</ol>
+<div class="admonition-note admonition">
+<p class="first admonition-title"><i class="fas fa-sticky-note" aria-hidden="true"></i>Note</p>
+<p class="last">If you want to customize user data, it is best to do so when initially scaffolding the app.
+Identity has a default user class called <code class="docutils literal notranslate"><span class="pre">IdentityUser</span></code>.
+<a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuser?view=aspnetcore-1.1" target="_blank">IdentityUser<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> has a number of properties that are important and relevant to storing user data.
+However, when you read through the requirements you may notice that you need additional properties, such as the user’s first and last name.
+If you want to add custom properties, check out this <a class="reference external" href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-5.0&amp;tabs=visual-studio" target="_blank">article<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> from Microsoft.</p>
+</div>
+</div>
+</div>
+
+
+
+    
+    <nav aria-label="Next and Previous Pages">
+      <ul class="pager">
+        
+        <li class="previous"><a href="users.html"><span aria-hidden="true">&larr;</span> 21.4. Registrations and Logins</a></li>
+        
+        
+        <li class="next"><a href="authorization.html">21.6. Identity and Authorization <span aria-hidden="true">&rarr;</span></a></li>
+        
+      </ul>
+    </nav>
+    
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../_sources/chapters/auth/configuration.rst.txt"
+     rel="nofollow">Page Source</a>
+</div>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

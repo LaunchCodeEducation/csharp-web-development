@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>12.3. Debugger &#8212; C# Web Development  documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fa/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/launchcode.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/site.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="12.4. Studio: If It Ain’t Broke, Add a Breakpoint!" href="studio.html" />
+    <link rel="prev" title="12.2. NuGet" href="nuget.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body class="body-bc">
+
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+   <div class="container">
+     <div class="navbar-header">
+       <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/lc-ed-logo.png" alt="LaunchCode logo"></span>
+       </a>
+       <span class="navbar-text navbar-version pull-left"><b></b></span>
+     </div>
+
+       <div class="collapse navbar-collapse nav-collapse">
+         <ul class="nav navbar-nav">
+           
+           
+             
+           
+           
+           
+           
+           
+         </ul>
+
+         
+           
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+    <label for="q" class="searchLabel">Search</label>
+    <input type="text" name="q" class="form-control" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+         
+       </div>
+   </div>
+ </div>
+
+<ol class="breadcrumb container">
+    <li><a href="../../index.html">Contents</a></li>
+    <li><a href="index.html">12. Tools in Visual Studio</a></li>
+    <li class="active">12.3. Debugger</li>
+</ol>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 content ">
+
+    
+  <div class="section" id="debugger">
+<h1>12.3. Debugger<a class="headerlink" href="#debugger" title="Permalink to this headline">¶</a></h1>
+<p>Watch this video to learn the basics of the debugging tools available in Visual Studio. If you want
+to follow along, Chris is debugging the <a class="reference internal" href="../data-types/objects-primer.html#hello-methods"><span class="std std-ref">HelloMethods</span></a> program back in the introduction to
+data types.</p>
+
+<div style="text-align:center;"><iframe width="800" height="450" src="https://www.youtube.com/embed/sACkw915kmg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p></p>
+<p>A summary of Chris’s debugger tips:</p>
+<ul class="simple">
+<li>Right click in the text editing window to add a breakpoint to your code.</li>
+<li>Start debug mode with the run button as you might normally run your program.</li>
+<li><dl class="first docutils">
+<dt>Debugger Panes:</dt>
+<dd><ul class="first last">
+<li><em>Autos</em> pane shows the values of parameters and variables on the line that the debugger is
+currently sitting on, as well as the line above.</li>
+<li><em>Locals</em> pane shows the value of local variables and parameters within the program being debugged.</li>
+<li>Add variables, parameters, and expressions to the <em>Watch</em> pane to monitor their values while debugging.</li>
+<li><em>Call Stack</em> pane displays the record of the methods that have been called in the program being debugged.</li>
+<li>View a list of breakpoints in the <em>Breakpoints</em> pane. You may also disable and enable breakpoints from here.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Debugger Buttons:</dt>
+<dd><ul class="first last">
+<li><em>Step over</em> button moves debugger to the next line to be executed within a method.</li>
+<li><em>Step out</em> button brings the debugger out of the execution of a method.</li>
+<li><em>Step into</em> button makes the debugger enter the method at which it is currently paused. Note that
+you can’t step into <code class="docutils literal notranslate"><span class="pre">System</span></code> defined methods, only those defined by your program.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Right click on the breakpoint to set conditional logic for when you want the breakpoint to run.</li>
+<li>Stop debug mode wth the stop button.</li>
+</ul>
+<div class="admonition-tip admonition">
+<p class="first admonition-title"><i class="fas fa-lightbulb" aria-hidden="true"></i>Tip</p>
+<p>Visual Studio for Mac extra tips:</p>
+<ul class="last simple">
+<li>Your IDE may not default to <em>Debug</em> mode. To select for it, in the top menu, select <em>View &gt; Debug</em>.</li>
+<li>To view the debugging panes, select <em>View</em> in the top menu and scroll down to <em>Debug Pads</em>. Select
+the items you wish to view, ie. <em>Breakpoints</em>, <em>Watch</em>, etc.</li>
+<li>To add conditions to a breakpoint, right click on the breakpoint and select <em>Edit Breakpoint</em>. From
+menu that opens, use the <em>Advanced Conditions</em> section to set your conditions for when you want the
+breakpoint to be executed.</li>
+</ul>
+</div>
+<div class="section" id="check-your-understanding">
+<h2>12.3.1. Check Your Understanding<a class="headerlink" href="#check-your-understanding" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-question admonition">
+<p class="first admonition-title"><i class="fas fa-question" aria-hidden="true"></i>Question</p>
+<p>True/False: Breakpoints on <code class="docutils literal notranslate"><span class="pre">Console.WriteLine()</span></code> are helpful because
+stepping into them reveals what is printed in the console.</p>
+<ol class="last loweralpha simple">
+<li>True</li>
+<li>False</li>
+</ol>
+</div>
+<div class="admonition-question admonition">
+<p class="first admonition-title"><i class="fas fa-question" aria-hidden="true"></i>Question</p>
+<p>Define a <em>breakpoint</em>.</p>
+<ol class="last loweralpha simple">
+<li>A point in our code where the debugger will stop running and provide information about the current state.</li>
+<li>A point in our code that we anticipate will result in an exception or error.</li>
+<li>A point in our code where we include a print statement to see what’s going on.</li>
+<li>A point in our code where we want to throw the computer out of a window because nothing works.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+    
+    <nav aria-label="Next and Previous Pages">
+      <ul class="pager">
+        
+        <li class="previous"><a href="nuget.html"><span aria-hidden="true">&larr;</span> 12.2. NuGet</a></li>
+        
+        
+        <li class="next"><a href="studio.html">12.4. Studio: If It Ain’t Broke, Add a Breakpoint! <span aria-hidden="true">&rarr;</span></a></li>
+        
+      </ul>
+    </nav>
+    
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../_sources/chapters/vstools/debugger.rst.txt"
+     rel="nofollow">Page Source</a>
+</div>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>15.5. Validation and Views &#8212; C# Web Development  documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/fa/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/launchcode.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/site.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="15.6. Exercises: ViewModels and Model Validation" href="exercises.html" />
+    <link rel="prev" title="15.4. Validating Models in a Controller" href="validation-controller.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body class="body-bc">
+
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+   <div class="container">
+     <div class="navbar-header">
+       <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/lc-ed-logo.png" alt="LaunchCode logo"></span>
+       </a>
+       <span class="navbar-text navbar-version pull-left"><b></b></span>
+     </div>
+
+       <div class="collapse navbar-collapse nav-collapse">
+         <ul class="nav navbar-nav">
+           
+           
+             
+           
+           
+           
+           
+           
+         </ul>
+
+         
+           
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+    <label for="q" class="searchLabel">Search</label>
+    <input type="text" name="q" class="form-control" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+         
+       </div>
+   </div>
+ </div>
+
+<ol class="breadcrumb container">
+    <li><a href="../../index.html">Contents</a></li>
+    <li><a href="index.html">15. ViewModels and Model Validation</a></li>
+    <li class="active">15.5. Validation and Views</li>
+</ol>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 content ">
+
+    
+  <div class="section" id="validation-and-views">
+<h1>15.5. Validation and Views<a class="headerlink" href="#validation-and-views" title="Permalink to this headline">¶</a></h1>
+<p>While our application is properly handing errors, we need to display the error messages so that the users know what information they should be adding.</p>
+<div class="section" id="displaying-error-messages-in-our-view-video">
+<h2>15.5.1. Displaying Error Messages in our View - Video<a class="headerlink" href="#displaying-error-messages-in-our-view-video" title="Permalink to this headline">¶</a></h2>
+
+<div style="text-align:center;"><iframe width="800" height="450" src="https://www.youtube.com/embed/3twcm6Smpkg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p></p>
+<div class="admonition-note admonition">
+<p class="first admonition-title"><i class="fas fa-sticky-note" aria-hidden="true"></i>Note</p>
+<p class="last">If you want to verify what code this video starts with, check out the <a class="reference external" href="https://github.com/LaunchCodeEducation/CodingEventsDemo/tree/handling-errors" target="_blank">handling-errors<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> branch.
+If you want to verify what code this video ends with, check out the <a class="reference external" href="https://github.com/LaunchCodeEducation/CodingEventsDemo/tree/display-error-messages" target="_blank">display-error-messages<i class="fas fa-external-link-alt" aria-hidden="true"></i></a> branch.</p>
+</div>
+</div>
+<div class="section" id="displaying-error-messages-in-our-view-text">
+<h2>15.5.2. Displaying Error Messages in our View - Text<a class="headerlink" href="#displaying-error-messages-in-our-view-text" title="Permalink to this headline">¶</a></h2>
+<p>Create a separate <code class="docutils literal notranslate"><span class="pre">span</span></code> element in the form.
+In the <code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> tag, we can add <code class="docutils literal notranslate"><span class="pre">asp-validation-for</span></code> to specify which property’s validation error messages should be displayed if the conditions are not met.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title"><i class="fas fa-sticky-note" aria-hidden="true"></i>Note</p>
+<p class="last">We don’t have to add anything else to display error messages, because that validation is already built in!</p>
+</div>
+<p>Now when we run our application and enter a bad event name or forget our description, we get the error message displaying what we should be entering!</p>
+<div class="admonition-warning admonition">
+<p class="first admonition-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i>Warning</p>
+<dl class="last docutils">
+<dt>In the video, we note that the <code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> element will only be materialized if the validation fails. This isn’t true. The <code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> element</dt>
+<dd>to contain the error message is always created, it just doesn’t contain any text if the validation rule it met.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="check-your-understanding">
+<h2>15.5.3. Check Your Understanding<a class="headerlink" href="#check-your-understanding" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-question admonition">
+<p class="first admonition-title"><i class="fas fa-question" aria-hidden="true"></i>Question</p>
+<p class="last"><strong>True or False</strong> In order to implement validation, all three elements of MVC applications are involved.</p>
+</div>
+</div>
+</div>
+
+
+
+    
+    <nav aria-label="Next and Previous Pages">
+      <ul class="pager">
+        
+        <li class="previous"><a href="validation-controller.html"><span aria-hidden="true">&larr;</span> 15.4. Validating Models in a Controller</a></li>
+        
+        
+        <li class="next"><a href="exercises.html">15.6. Exercises: ViewModels and Model Validation <span aria-hidden="true">&rarr;</span></a></li>
+        
+      </ul>
+    </nav>
+    
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../../_sources/chapters/aspdotnet-model-validation/validation-views.rst.txt"
+     rel="nofollow">Page Source</a>
+</div>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
